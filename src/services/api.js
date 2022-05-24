@@ -1,9 +1,9 @@
 // Iniciando implementação.
 function readsParams(categoryId, query) {
   const strings = [];
-  let callString;
-  if (categoryId !== '') strings[0] += `category=${categoryId}`;
-  if (query !== '') strings[1] += `q=${query}`;
+  let callString = '';
+  if (categoryId !== '') strings.push(`category=${categoryId}`);
+  if (query !== '') strings.push(`q=${query}`);
   if (strings.length !== 0) {
     for (let i = 0; i < strings.length; i += 1) {
       if (i === strings.length - 1) {
@@ -16,6 +16,7 @@ function readsParams(categoryId, query) {
   } else {
     callString = `q=${''}`;
   }
+  console.log(callString);
   return callString;
 }
 export async function getCategories() {
