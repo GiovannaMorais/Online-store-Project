@@ -1,3 +1,5 @@
+// Iniciando implementação.
+
 export async function getCategories() {
   // Implemente aqui
 }
