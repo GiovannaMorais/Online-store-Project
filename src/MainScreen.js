@@ -6,7 +6,7 @@ class MainScreen extends React.Component {
   render() {
     return (
       <div>
-        <label htmlFor="busca">
+        <label htmlFor="bussca">
           <input type="text" />
         </label>
         <p data-testid="home-initial-message">
