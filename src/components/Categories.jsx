@@ -38,7 +38,7 @@ export default class Categories extends React.Component {
                     <button
                       type="button"
                       className="category-button"
-                      onClick={ () => handleCategoryClick(name, id) }
+                      onClick={ () => handleCategoryClick(id, name) }
                       data-testid="category"
                     >
                       { name }
