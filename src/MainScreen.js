@@ -1,4 +1,5 @@
 import React from 'react';
+import Categories from './components/Categories';
 
 class MainScreen extends React.Component {
   render() {
@@ -10,6 +11,7 @@ class MainScreen extends React.Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
+        <Categories />
       </div>
     );
   }
