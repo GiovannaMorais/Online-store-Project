@@ -1,4 +1,5 @@
 import React from 'react';
+import Categories from './components/Categories';
 import { Link } from 'react-router-dom';
 
 class MainScreen extends React.Component {
@@ -14,6 +15,7 @@ class MainScreen extends React.Component {
         <Link to="ShoppingCart">
           <button type="submit" data-testid="shopping-cart-button">Carrinho</button>
         </Link>
+        <Categories />
       </div>
     );
   }
