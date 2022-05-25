@@ -11,7 +11,11 @@ export default class CardProducts extends React.Component {
           products.map((product) => {
             const key = product.id;
             return (
-              <Link key={ key } to={ `/product-details/${key}` }>
+              <Link
+                key={ key }
+                to={ `/product-details/${key}` }
+                data-testid="product-detail-link"
+              >
                 <div data-testid="product">
                   <div>
                     <p>{ product.title }</p>
