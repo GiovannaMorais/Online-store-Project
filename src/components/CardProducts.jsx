@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import ShowCard from './ShowCard';
 
 export default class CardProducts extends React.Component {
   addToCart = (product) => {
@@ -20,26 +20,9 @@ export default class CardProducts extends React.Component {
           products.map((product) => {
             const key = product.id;
             return (
-              <Link
-                key={ key }
-                to={ `/product-details/${key}` }
-                data-testid="product-detail-link"
-              >
-                <div data-testid="product">
-                  <div>
-                      <p>{ product.title }</p>
-                    </div>
-                    <div>
-                      <div>
-                        <img src={ product.thumbnail } alt="" />
-                      </div>
-                      <div>
-                        <span>R$</span>
-                        <span>{ product.price }</span>
-                      </div>
-                    </div>
-                  </div>
-
+              <div key={ key }>
+                <ShowCard keyid={ key } product={ product } />
+                <div>
                   <button
                     type="button"
                     data-testid="product-add-to-cart"
@@ -48,7 +31,7 @@ export default class CardProducts extends React.Component {
                     Adicionar ao Carrinho
                   </button>
                 </div>
-              </Link>
+              </div>
             );
           })
         }
