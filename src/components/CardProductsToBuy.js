@@ -19,9 +19,36 @@ export default class CardProductsToBuy extends React.Component {
     this.setState({ productList: Object.entries(cartproducts) });
   }
 
+  productIncreaseQuantity=(id, num) => {
+    const { productList } = this.state;
+    const amountProducts = productList.map((item) => {
+      if (item[0] === id) {
+        item[1] += num;
+        if (item[1] < 1) {
+          item[1] = 1;
+        }
+      }
+
+      return item;
+    }).filter((item) => item !== undefined);
+    this.setState({ productList: amountProducts });
+  }
+
+  removeProduct=(id) => {
+    const { productList } = this.state;
+    const amountProducts = productList.map((item) => {
+      if (item[0] === id) {
+        return undefined;
+      }
+      return item;
+    }).filter((item) => item !== undefined);
+    this.setState({ productList: amountProducts });
+  }
+
   render() {
     const productsToBuy = JSON.parse(sessionStorage.getItem('productsToBuy'));
     const { productList } = this.state;
+    const num = -1;
     return (
       <div>
         {
@@ -43,9 +70,31 @@ export default class CardProductsToBuy extends React.Component {
                   </div>
                 </div>
                 <div>
+                  <button
+                    type="button"
+                    data-testid="product-decrease-quantity"
+                    onClick={ () => this.productIncreaseQuantity(key, num) }
+                  >
+                    -
+                  </button>
                   <span data-testid="shopping-cart-product-quantity">
                     { productId[1] }
                   </span>
+                  <button
+                    type="button"
+                    data-testid="product-increase-quantity"
+                    onClick={ () => this.productIncreaseQuantity(key, 1) }
+                    value={ key }
+                  >
+                    +
+                  </button>
+                  <button
+                    type="button"
+                    onClick={ () => this.removeProduct(key) }
+                  >
+                    Remover
+                  </button>
+
                 </div>
               </div>
             );
