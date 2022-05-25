@@ -43,7 +43,9 @@ export default class CardProductsToBuy extends React.Component {
                   </div>
                 </div>
                 <div>
-                  <span data-testid="shopping-cart-product-quantity">{ productId[1] }</span>
+                  <span data-testid="shopping-cart-product-quantity">
+                    { productId[1] }
+                  </span>
                 </div>
               </div>
             );
