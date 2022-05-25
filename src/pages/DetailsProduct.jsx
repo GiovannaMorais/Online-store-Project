@@ -1,10 +1,10 @@
 import React from 'react';
 
-class DetailsProduct extends React.Component {
+export default class DetailsProduct extends React.Component {
+  render() {
     const { match: { params: { id } } } = this.props;
-    render() {
-        return(
-
-        )
-    }
+    return (
+      <h1>Product details</h1>
+    );
+  }
 }
