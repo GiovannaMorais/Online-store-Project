@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
+import AddCartButton from '../components/AddCartButton';
 
 export default class DetailsProduct extends React.Component {
   state = {
@@ -39,6 +41,8 @@ export default class DetailsProduct extends React.Component {
     const { product } = this.state;
     const { title, price, pictures, shipping, attributes } = product;
     const { setImage } = this.state;
+    const text = 'Adicionar ao carrinho.';
+    const datatest = 'product-detail-add-to-cart';
     const picNum = 4;
     const picList = pictures.slice(0, picNum);
     return (
@@ -53,6 +57,10 @@ export default class DetailsProduct extends React.Component {
                 className="main-image-container"
               />
             </div>
+            <AddCartButton datatest={ datatest } text={ text } product={ product } />
+            <Link to="/ShoppingCart">
+              <button type="submit" data-testid="shopping-cart-button">Carrinho</button>
+            </Link>
             <div className="product-pictures">
               {
                 picList.slice(0, picNum).map((picture) => {

@@ -61,7 +61,7 @@ class MainScreen extends React.Component {
             }
           </div>
         </div>
-        <Link to="ShoppingCart">
+        <Link to="/ShoppingCart">
           <button type="submit" data-testid="shopping-cart-button">Carrinho</button>
         </Link>
         <Categories handleCategoryClick={ this.handleCategoryClick } />
