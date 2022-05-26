@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import AddCartButton from '../components/AddCartButton';
 import Rating from '../components/Rating';
 import ShowRating from '../components/ShowRating';
+import ToShoppingCartButton from '../components/ToShoppingCartButton';
 
 export default class DetailsProduct extends React.Component {
   state = {
@@ -72,6 +72,10 @@ export default class DetailsProduct extends React.Component {
     this.setState({ comment: clearComment });
   }
 
+  update = () => {
+    this.forceUpdate();
+  }
+
   generateName(name, price) {
     return (
       <div>
@@ -81,6 +85,14 @@ export default class DetailsProduct extends React.Component {
         </h2>
       </div>
     );
+  }
+
+  readsQuantity() {
+    if (sessionStorage.productsToBuy === undefined) {
+      sessionStorage.setItem('productsToBuy', JSON.stringify([]));
+    }
+    const productsToBuy = JSON.parse(sessionStorage.getItem('productsToBuy'));
+    return productsToBuy.length;
   }
 
   render() {
@@ -107,10 +119,16 @@ export default class DetailsProduct extends React.Component {
                 className="main-image-container"
               />
             </div>
-            <AddCartButton datatest={ datatest } text={ text } product={ product } />
-            <Link to="/ShoppingCart">
-              <button type="submit" data-testid="shopping-cart-button">Carrinho</button>
-            </Link>
+            <AddCartButton
+              datatest={ datatest }
+              text={ text }
+              product={ product }
+              screen={ () => this.update() }
+            />
+            <ToShoppingCartButton
+              quantity={ this.readsQuantity() }
+              screen={ () => this.update() }
+            />
             <div className="product-pictures">
               {
                 picList.slice(0, picNum).map((picture) => {
