@@ -19,16 +19,39 @@ export default class CardProductsToBuy extends React.Component {
     this.setState({ productList: Object.entries(cartproducts) });
   }
 
-  productIncreaseQuantity=(id, num) => {
+  removeAddProduct = (id, num) => {
+    const productsToBuy = JSON.parse(sessionStorage.getItem('productsToBuy'));
+    if (num < 0) {
+      for (let i = 0; i < productsToBuy.length; i += 1) {
+        if (productsToBuy[i].id === id) {
+          productsToBuy[i] = undefined;
+          break;
+        }
+      }
+      sessionStorage.setItem('productsToBuy', JSON
+        .stringify(productsToBuy.filter((prod) => prod !== undefined)));
+    } else {
+      const chosenProduct = productsToBuy.find((product) => product.id === id);
+      productsToBuy.push(chosenProduct);
+      sessionStorage.setItem('productsToBuy', JSON.stringify(productsToBuy));
+    }
+  }
+
+  productChangeQuantity=(id, num) => {
     const { productList } = this.state;
     const amountProducts = productList.map((item) => {
       if (item[0] === id) {
-        item[1] += num;
-        if (item[1] < 1) {
-          item[1] = 1;
+        if (num > 0) {
+          item[1] += num;
+          this.removeAddProduct(id, num);
+          return item;
+        }
+        if (item[1] > 1) {
+          item[1] += num;
+          this.removeAddProduct(id, num);
+          return item;
         }
       }
-
       return item;
     }).filter((item) => item !== undefined);
     this.setState({ productList: amountProducts });
@@ -42,6 +65,14 @@ export default class CardProductsToBuy extends React.Component {
       }
       return item;
     }).filter((item) => item !== undefined);
+    const productsToBuy = JSON.parse(sessionStorage.getItem('productsToBuy'));
+    const newList = productsToBuy.map((product) => {
+      if (product.id === id) {
+        return undefined;
+      }
+      return product;
+    }).filter((item) => item !== undefined);
+    sessionStorage.setItem('productsToBuy', JSON.stringify(newList));
     this.setState({ productList: amountProducts });
   }
 
@@ -73,7 +104,7 @@ export default class CardProductsToBuy extends React.Component {
                   <button
                     type="button"
                     data-testid="product-decrease-quantity"
-                    onClick={ () => this.productIncreaseQuantity(key, num) }
+                    onClick={ () => this.productChangeQuantity(key, num) }
                   >
                     -
                   </button>
@@ -83,7 +114,7 @@ export default class CardProductsToBuy extends React.Component {
                   <button
                     type="button"
                     data-testid="product-increase-quantity"
-                    onClick={ () => this.productIncreaseQuantity(key, 1) }
+                    onClick={ () => this.productChangeQuantity(key, 1) }
                     value={ key }
                   >
                     +

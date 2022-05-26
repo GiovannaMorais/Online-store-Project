@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import CardProducts from './components/CardProducts';
 import Categories from './components/Categories';
+import ToShoppingCartButton from './components/ToShoppingCartButton';
 import * as api from './services/api';
 
 class MainScreen extends React.Component {
@@ -61,9 +61,7 @@ class MainScreen extends React.Component {
             }
           </div>
         </div>
-        <Link to="/ShoppingCart">
-          <button type="submit" data-testid="shopping-cart-button">Carrinho</button>
-        </Link>
+        <ToShoppingCartButton />
         <Categories handleCategoryClick={ this.handleCategoryClick } />
       </div>
     );
