@@ -26,6 +26,18 @@ class MainScreen extends React.Component {
     this.setState({ [name]: value });
   }
 
+  update = () => {
+    this.forceUpdate();
+  }
+
+  readsQuantity() {
+    if (sessionStorage.productsToBuy === undefined) {
+      sessionStorage.setItem('productsToBuy', JSON.stringify([]));
+    }
+    const productsToBuy = JSON.parse(sessionStorage.getItem('productsToBuy'));
+    return productsToBuy.length;
+  }
+
   render() {
     const { products, categoryID, searchTerm } = this.state;
     // console.log(products);
@@ -56,12 +68,12 @@ class MainScreen extends React.Component {
           <div>
             {
               products.length > 0
-                ? <CardProducts products={ products } />
+                ? <CardProducts products={ products } screen={ () => this.update() } />
                 : <p>Nenhum produto foi encontrado</p>
             }
           </div>
         </div>
-        <ToShoppingCartButton />
+        <ToShoppingCartButton quantity={ this.readsQuantity() } />
         <Categories handleCategoryClick={ this.handleCategoryClick } />
       </div>
     );

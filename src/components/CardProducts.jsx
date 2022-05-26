@@ -13,10 +13,16 @@ export default class CardProducts extends React.Component {
         {
           products.map((product) => {
             const key = product.id;
+            const { screen } = this.props;
             return (
               <div key={ key }>
                 <ShowCard keyid={ key } product={ product } />
-                <AddCartButton datatest={ datatest } text={ text } product={ product } />
+                <AddCartButton
+                  datatest={ datatest }
+                  text={ text }
+                  product={ product }
+                  screen={ screen }
+                />
               </div>
             );
           })
@@ -28,4 +34,5 @@ export default class CardProducts extends React.Component {
 
 CardProducts.propTypes = {
   products: propTypes.arrayOf(propTypes.object).isRequired,
+  screen: propTypes.func.isRequired,
 };

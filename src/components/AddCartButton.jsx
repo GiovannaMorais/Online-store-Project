@@ -13,12 +13,16 @@ export default class AddCartButton extends React.Component {
 
   render() {
     const { datatest, text, product } = this.props;
+    const { screen } = this.props;
     return (
       <div>
         <button
           type="button"
           data-testid={ datatest }
-          onClick={ () => this.addToCart(product) }
+          onClick={ () => {
+            screen();
+            this.addToCart(product);
+          } }
         >
           { text }
         </button>
@@ -31,4 +35,5 @@ AddCartButton.propTypes = {
   datatest: propTypes.string.isRequired,
   text: propTypes.string.isRequired,
   product: propTypes.shape({}).isRequired,
+  screen: propTypes.func.isRequired,
 };
