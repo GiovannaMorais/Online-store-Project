@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CardProductsToBuy from './components/CardProductsToBuy';
-import {Link} from 'react-router-dom';
-import CartCheckout from './components/CartCheckout';
+// import CartCheckout from './components/CartCheckout';
 
 class ShoppingCart extends React.Component {
   render() {
@@ -14,8 +14,8 @@ class ShoppingCart extends React.Component {
             : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
         }
         <Link to="/CartCheckout">
-          <button data-testid="checkout-products">Finalizar Compra</button>
-          </Link>
+          <button type="button" data-testid="checkout-products">Finalizar Compra</button>
+        </Link>
       </div>
     );
   }
