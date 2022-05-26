@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CardProductsToBuy from './components/CardProductsToBuy';
-// import CartCheckout from './components/CartCheckout';
 
 class ShoppingCart extends React.Component {
   render() {
