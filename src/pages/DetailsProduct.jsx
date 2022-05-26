@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import AddCartButton from '../components/AddCartButton';
 import Rating from '../components/Rating';
+import ShowRating from '../components/ShowRating';
 
 export default class DetailsProduct extends React.Component {
   state = {
@@ -13,6 +14,12 @@ export default class DetailsProduct extends React.Component {
       shipping: false,
       attributes: [],
     },
+    comment: {
+      email: '',
+      messageRating: '',
+      rating: 0,
+      id: 0,
+    },
     setImage: '',
   }
 
@@ -20,11 +27,49 @@ export default class DetailsProduct extends React.Component {
     const { match: { params: { id } } } = this.props;
     const productInfo = await fetch(`https://api.mercadolibre.com/items/${id}`)
       .then((response) => response.json());
-    this.setState({ product: productInfo, setImage: productInfo.pictures[0].url });
+    this.setState({
+      product: productInfo,
+      setImage: productInfo.pictures[0].url,
+    });
+  }
+
+  handleChange = ({ target: { value, name } }) => {
+    const { comment } = this.state;
+    const newComment = comment;
+    newComment[name] = value;
+    this.setState({ comment: newComment });
+  }
+
+  rateProduct = (rate) => {
+    const { comment } = this.state;
+    const newComment = comment;
+    newComment.rating = rate;
+    this.setState({ comment: newComment });
+  }
+
+  generateID = () => {
+    const id = Math.random();
+    const { comment } = this.state;
+    const newComment = comment;
+    newComment.id = id;
+    this.setState({ comment: newComment });
   }
 
   handleChangeImageButton = (url) => {
     this.setState({ setImage: url });
+  }
+
+  addComment = (comment) => {
+    const newCommentList = JSON.parse(sessionStorage.getItem('commentList'));
+    const clearComment = {
+      email: '',
+      messageRating: '',
+      rating: 0,
+      id: 0,
+    };
+    newCommentList.unshift(comment);
+    sessionStorage.setItem('commentList', JSON.stringify(newCommentList));
+    this.setState({ comment: clearComment });
   }
 
   generateName(name, price) {
@@ -39,7 +84,11 @@ export default class DetailsProduct extends React.Component {
   }
 
   render() {
-    const { product } = this.state;
+    const { product, comment } = this.state;
+    if (sessionStorage.commentList === undefined) {
+      sessionStorage.setItem('commentList', JSON.stringify([]));
+    }
+    const commentList = JSON.parse(sessionStorage.getItem('commentList'));
     const { title, price, pictures, shipping, attributes } = product;
     const { setImage } = this.state;
     const text = 'Adicionar ao carrinho.';
@@ -109,7 +158,28 @@ export default class DetailsProduct extends React.Component {
                 })
               }
             </ul>
-            <Rating />
+            <Rating
+              addComment={ this.addComment }
+              handleChange={ this.handleChange }
+              rateProduct={ this.rateProduct }
+              generateID={ this.generateID }
+              comment={ comment }
+            />
+            <div>
+              {
+                commentList.map((commentIndex) => {
+                  const key = commentIndex.id;
+                  return (
+                    <ShowRating
+                      key={ key }
+                      email={ commentIndex.email }
+                      comment={ commentIndex.messageRating }
+                      starPosition={ commentIndex.rating }
+                    />
+                  );
+                })
+              }
+            </div>
           </div>
         </main>
       </section>

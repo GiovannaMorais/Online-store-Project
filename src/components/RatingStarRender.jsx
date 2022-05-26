@@ -2,12 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import '../css/ratingStars.css';
 
-export default class RatingStars extends React.Component {
-  rateStar = ({ target: { value } }) => {
-    const { rateProduct } = this.props;
-    rateProduct(value);
-  }
-
+export default class RatingStarRender extends React.Component {
   generateStars = (position) => {
     const starAmount = 5;
     const starArray = [];
@@ -15,12 +10,11 @@ export default class RatingStars extends React.Component {
       if (i <= position) {
         starArray.push((
           <button
-            key={ `button${i}` }
+            key={ `button${i}Comment` }
             type="button"
             value={ i }
             onClick={ this.rateStar }
-            className="ratingStar checkedStar"
-            data-testid={ `${i + 1}-rating` }
+            className="commentRatingStar checkedStar"
           >
             ★
           </button>
@@ -28,12 +22,11 @@ export default class RatingStars extends React.Component {
       } else {
         starArray.push((
           <button
-            key={ `button${i}` }
+            key={ `button${i}Comment` }
             type="button"
             value={ i }
             onClick={ this.rateStar }
-            className="ratingStar"
-            data-testid={ `${i + 1}-rating` }
+            className="commentRatingStar"
           >
             ★
           </button>
@@ -44,16 +37,15 @@ export default class RatingStars extends React.Component {
   }
 
   render() {
-    const { position } = this.props;
+    const { starPosition } = this.props;
     return (
       <div>
-        {this.generateStars(position)}
+        { this.generateStars(starPosition) }
       </div>
     );
   }
 }
 
-RatingStars.propTypes = {
-  rateProduct: propTypes.func.isRequired,
-  position: propTypes.number.isRequired,
+RatingStarRender.propTypes = {
+  starPosition: propTypes.string.isRequired,
 };

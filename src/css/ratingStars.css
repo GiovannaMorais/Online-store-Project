@@ -1,0 +1,18 @@
+.ratingStar, .commentRatingStar {
+  background-color: none;
+  border: none;
+  color: black;
+  outline: none;
+}
+
+.ratingStar {
+  font-size: 2em;
+}
+
+.checkedStar {
+  color: blue;
+}
+
+.commentRatingStar {
+  font-size: 1em;
+}
