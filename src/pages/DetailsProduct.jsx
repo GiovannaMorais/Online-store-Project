@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import AddCartButton from '../components/AddCartButton';
+import Rating from '../components/Rating';
 
 export default class DetailsProduct extends React.Component {
   state = {
@@ -108,6 +109,7 @@ export default class DetailsProduct extends React.Component {
                 })
               }
             </ul>
+            <Rating />
           </div>
         </main>
       </section>
