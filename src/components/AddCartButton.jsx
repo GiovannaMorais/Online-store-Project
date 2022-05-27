@@ -7,8 +7,13 @@ export default class AddCartButton extends React.Component {
       sessionStorage.setItem('productsToBuy', JSON.stringify([]));
     }
     const productsToBuy = JSON.parse(sessionStorage.getItem('productsToBuy'));
-    productsToBuy.push(product);
-    sessionStorage.setItem('productsToBuy', JSON.stringify(productsToBuy));
+    const itemQuantity = productsToBuy.filter((item) => item.id === product.id).length;
+    let productAvailable = product.available_quantity;
+    if (productAvailable < 1) productAvailable = 1;
+    if (itemQuantity < productAvailable) {
+      productsToBuy.push(product);
+      sessionStorage.setItem('productsToBuy', JSON.stringify(productsToBuy));
+    }
   }
 
   render() {
