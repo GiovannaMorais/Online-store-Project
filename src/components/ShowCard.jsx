@@ -19,6 +19,12 @@ export default class ShowCard extends React.Component {
               <img src={ product.thumbnail } alt="" />
             </div>
             <div>
+              {
+                product.shipping.free_shipping
+                && <span data-testid="free-shipping">Frete Grátis</span>
+              }
+            </div>
+            <div>
               <span>R$</span>
               <span>{ product.price }</span>
             </div>
@@ -35,5 +41,8 @@ ShowCard.propTypes = {
     title: propTypes.string.isRequired,
     thumbnail: propTypes.string.isRequired,
     price: propTypes.number.isRequired,
+    shipping: propTypes.shape({
+      free_shipping: propTypes.bool.isRequired,
+    }).isRequired,
   }).isRequired,
 };

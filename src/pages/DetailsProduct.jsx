@@ -152,13 +152,14 @@ export default class DetailsProduct extends React.Component {
           </div>
           <div className="product-attributes">
             <ul className="attribute-list">
-              <li>
-                {
-                  shipping.free_shipping
-                    ? 'Frete grátis: Sim.'
-                    : 'Frete grátis: Não.'
-                }
-              </li>
+              {
+                shipping.free_shipping
+                && (
+                  <li>
+                    <span data-testid="free-shipping">Frete Grátis</span>
+                  </li>
+                )
+              }
               {
                 attributes.map((attribute) => {
                   const key = attribute.id;

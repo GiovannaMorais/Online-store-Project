@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 export default class CardProductsToBuy extends React.Component {
   state = {
@@ -19,36 +20,37 @@ export default class CardProductsToBuy extends React.Component {
     this.setState({ productList: Object.entries(cartproducts) });
   }
 
-  removeAddProduct = (id, num) => {
-    const productsToBuy = JSON.parse(sessionStorage.getItem('productsToBuy'));
+  removeAddProduct = (id, num, products) => {
     if (num < 0) {
-      for (let i = 0; i < productsToBuy.length; i += 1) {
-        if (productsToBuy[i].id === id) {
-          productsToBuy[i] = undefined;
+      for (let i = 0; i < products.length; i += 1) {
+        if (products[i].id === id) {
+          products[i] = undefined;
           break;
         }
       }
       sessionStorage.setItem('productsToBuy', JSON
-        .stringify(productsToBuy.filter((prod) => prod !== undefined)));
+        .stringify(products.filter((prod) => prod !== undefined)));
     } else {
-      const chosenProduct = productsToBuy.find((product) => product.id === id);
-      productsToBuy.push(chosenProduct);
-      sessionStorage.setItem('productsToBuy', JSON.stringify(productsToBuy));
+      const chosenProduct = products.find((product) => product.id === id);
+      products.push(chosenProduct);
+      sessionStorage.setItem('productsToBuy', JSON.stringify(products));
     }
   }
 
   productChangeQuantity=(id, num) => {
     const { productList } = this.state;
+    const productsToBuy = JSON.parse(sessionStorage.getItem('productsToBuy'));
+    const quantity = productsToBuy.find((item) => item.id === id).available_quantity;
     const amountProducts = productList.map((item) => {
       if (item[0] === id) {
-        if (num > 0) {
+        if (num > 0 && item[1] < quantity) {
           item[1] += num;
-          this.removeAddProduct(id, num);
+          this.removeAddProduct(id, num, productsToBuy);
           return item;
         }
-        if (item[1] > 1) {
+        if (item[1] > 1 && num < 0) {
           item[1] += num;
-          this.removeAddProduct(id, num);
+          this.removeAddProduct(id, num, productsToBuy);
           return item;
         }
       }
@@ -59,6 +61,7 @@ export default class CardProductsToBuy extends React.Component {
 
   removeProduct=(id) => {
     const { productList } = this.state;
+    const { screen } = this.props;
     const amountProducts = productList.map((item) => {
       if (item[0] === id) {
         return undefined;
@@ -74,6 +77,7 @@ export default class CardProductsToBuy extends React.Component {
     }).filter((item) => item !== undefined);
     sessionStorage.setItem('productsToBuy', JSON.stringify(newList));
     this.setState({ productList: amountProducts });
+    screen();
   }
 
   render() {
@@ -135,3 +139,7 @@ export default class CardProductsToBuy extends React.Component {
     );
   }
 }
+
+CardProductsToBuy.propTypes = {
+  screen: propTypes.func.isRequired,
+};
