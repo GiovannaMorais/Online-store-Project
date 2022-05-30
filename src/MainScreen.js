@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CardProducts from './components/CardProducts';
 import Categories from './components/Categories';
+import Header from './components/Header';
 import ToShoppingCartButton from './components/ToShoppingCartButton';
 import * as api from './services/api';
 
@@ -44,6 +46,7 @@ class MainScreen extends React.Component {
     console.log(categoryID);
     return (
       <div>
+        <Link to="/Header">Home</Link>
         <div>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
