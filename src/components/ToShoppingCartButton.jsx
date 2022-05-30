@@ -7,8 +7,7 @@ export default class ToShoppingCartButton extends React.Component {
     const { quantity } = this.props;
     return (
       <Link to="/ShoppingCart">
-        <button type="submit" data-testid="shopping-cart-button">
-          Carrinho
+        <button className="quantity" type="submit" data-testid="shopping-cart-button">
           <span data-testid="shopping-cart-size">{ quantity }</span>
         </button>
       </Link>
