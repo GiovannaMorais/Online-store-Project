@@ -7,6 +7,7 @@ ela lide tanto com o nome quanto com o id.
 import propTypes from 'prop-types';
 import React from 'react';
 import * as api from '../services/api';
+import '../css/categories.css';
 
 export default class Categories extends React.Component {
   state = {
@@ -24,12 +25,12 @@ export default class Categories extends React.Component {
     const { handleCategoryClick } = this.props;
     console.log(`loading:${loading}`);
     return (
-      <div>
-        <div>
-          <h2>holder</h2>
+      <div className="categories-component-container">
+        <div className="categories-header2-container">
+          <h2>Categorias</h2>
         </div>
-        <div>
-          <ul>
+        <div className="categories-container">
+          <ul className="categories-list">
             {
               categoryList.map((category) => {
                 const { name, id } = category;
