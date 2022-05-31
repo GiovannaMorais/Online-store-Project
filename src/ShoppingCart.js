@@ -19,7 +19,10 @@ class ShoppingCart extends React.Component {
   generateCart() {
     return (
       <div>
-        <CardProductsToBuy screen={ () => this.update() } />
+        <CardProductsToBuy
+          screen={ () => this.update() }
+          quantity={ this.readsQuantity() }
+        />
         <Link to="/CartCheckout">
           <button type="button" data-testid="checkout-products">Finalizar Compra</button>
         </Link>

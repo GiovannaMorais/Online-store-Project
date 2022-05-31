@@ -39,6 +39,7 @@ export default class CardProductsToBuy extends React.Component {
 
   productChangeQuantity=(id, num) => {
     const { productList } = this.state;
+    const { screen } = this.props;
     const productsToBuy = JSON.parse(sessionStorage.getItem('productsToBuy'));
     const quantity = productsToBuy.find((item) => item.id === id).available_quantity;
     const amountProducts = productList.map((item) => {
@@ -57,6 +58,7 @@ export default class CardProductsToBuy extends React.Component {
       return item;
     }).filter((item) => item !== undefined);
     this.setState({ productList: amountProducts });
+    screen();
   }
 
   removeProduct=(id) => {
