@@ -9,25 +9,24 @@ export default class ShowCard extends React.Component {
       <Link
         to={ `/product-details/${keyid}` }
         data-testid="product-detail-link"
+        className="product-card-link"
       >
-        <div data-testid="product">
-          <div>
+        <div data-testid="product" className="product-item">
+          <div className="product-title">
             <p>{ product.title }</p>
           </div>
-          <div>
-            <div>
-              <img src={ product.thumbnail } alt="" />
-            </div>
-            <div>
-              {
-                product.shipping.free_shipping
-                && <span data-testid="free-shipping">Frete Grátis</span>
-              }
-            </div>
-            <div>
-              <span>R$</span>
-              <span>{ product.price }</span>
-            </div>
+          <div className="product-thumbnail">
+            <img src={ product.thumbnail } alt="" />
+          </div>
+          <div className="product-shipping">
+            {
+              product.shipping.free_shipping
+              && <span data-testid="free-shipping">Frete Grátis</span>
+            }
+          </div>
+          <div className="product-price">
+            <span>R$</span>
+            <span>{ product.price }</span>
           </div>
         </div>
       </Link>

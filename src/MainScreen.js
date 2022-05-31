@@ -1,8 +1,10 @@
 import React from 'react';
 import CardProducts from './components/CardProducts';
 import Categories from './components/Categories';
-import ToShoppingCartButton from './components/ToShoppingCartButton';
+// import ToShoppingCartButton from './components/ToShoppingCartButton';
 import * as api from './services/api';
+import './css/mainScreen.css';
+import Header from './components/Header';
 
 class MainScreen extends React.Component {
   state = {
@@ -43,29 +45,39 @@ class MainScreen extends React.Component {
     // console.log(products);
     console.log(categoryID);
     return (
-      <div>
-        <div>
-          <p data-testid="home-initial-message">
+      <div className="main-screen-page">
+        <div className="header-container">
+          <Header screen={ () => this.update } quantity={ this.readsQuantity() } />
+        </div>
+        <div className="header-page-ruler" />
+        <div className="search-container">
+          <p data-testid="home-initial-message" className="search-text">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <label htmlFor="busca">
+          <label htmlFor="busca" className="search-bar">
             <input
               type="text"
               id="busca"
               data-testid="query-input"
+              placeholder="Digite nome do produto."
               value={ searchTerm }
               name="searchTerm"
               onChange={ this.handleChange }
             />
+            <button
+              type="button"
+              data-testid="query-button"
+              onClick={ () => this.handleSearch(categoryID, searchTerm) }
+            >
+              Search
+            </button>
           </label>
-          <button
-            type="button"
-            data-testid="query-button"
-            onClick={ () => this.handleSearch(categoryID, searchTerm) }
-          >
-            Search
-          </button>
-          <div>
+        </div>
+        <div className="bottom-screen">
+          <div className="left-main-screen">
+            <Categories handleCategoryClick={ this.handleCategoryClick } />
+          </div>
+          <div className="right-main-screen">
             {
               products.length > 0
                 ? <CardProducts products={ products } screen={ () => this.update() } />
@@ -73,8 +85,7 @@ class MainScreen extends React.Component {
             }
           </div>
         </div>
-        <ToShoppingCartButton quantity={ this.readsQuantity() } />
-        <Categories handleCategoryClick={ this.handleCategoryClick } />
+        {/* <ToShoppingCartButton quantity={ this.readsQuantity() } /> */}
       </div>
     );
   }

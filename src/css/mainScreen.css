@@ -1,0 +1,131 @@
+.main-screen-page {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.header-container {
+  width: 100%;
+  height: 150px;
+  background-color: black;
+  border-bottom: solid 10px inherit;
+}
+
+.header-page-ruler {
+  height: 10px;
+  background-color: rgb(218, 165, 32, 0.6);
+  border-bottom: solid 15px black;
+}
+
+.header-simulation {
+  width: 100%;
+  height: 100%;
+}
+
+.search-container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.search-text {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.search-bar {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-bar input {
+  width: 60%;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: solid 5px rgb(0, 0, 0);
+  outline: 1px solid rgb(141, 138, 138);
+  background-color: rgba(255, 255, 255, 0.8);;
+}
+
+.search-bar input:focus {
+  border: solid 5px rgba(0, 0, 0, 0.6);
+}
+
+.search-bar button {
+  height: 26px;
+  width: 80px;
+  border-radius: 10px;
+  border: solid 1px white;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+.bottom-screen {
+  display: flex;
+  width: 90%;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto 150px;
+  height: 800px;
+  min-height: fit-content;
+}
+
+.left-main-screen {
+  width: 260px;
+  height: 100%;
+  min-width: fit-content;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.right-main-screen {
+  margin-left: 10px;
+  min-height: fit-content;
+  height: 100%;
+  flex-grow: 1;
+  flex-basis: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: solid 5px rgb(218, 165, 32, 0.6);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+@media only screen and ( max-width: 848px ) {
+  .left-main-screen {
+    flex-grow: 1;
+    margin: 0;
+    position: relative;
+    left: 5px;
+    margin-bottom: 40px;
+    height: 300px;
+  }
+
+  .right-main-screen {
+    margin-top: 20px;
+  }
+
+  .categories-container {
+    justify-content: center;
+    align-items: center;
+    height: 220px;
+    overflow-y: scroll;
+    font-size: 1.3em;
+  }
+
+  .categories-list li button {
+    height: 40px;
+  }
+
+  .categories-list li:first-child {
+    margin-top: 1100px;
+  }
+}

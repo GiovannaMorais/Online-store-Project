@@ -5,6 +5,7 @@ import MainScreen from './MainScreen';
 import ShoppingCart from './ShoppingCart';
 import DetailsProduct from './pages/DetailsProduct';
 import CartCheckout from './components/CartCheckout';
+import Header from './components/Header';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/ShoppingCart" component={ ShoppingCart } />
         <Route exact path="/product-details/:id" component={ DetailsProduct } />
         <Route exact path="/CartCheckout" component={ CartCheckout } />
+        <Route path="/header" component={ Header } />
       </Switch>
     </Router>
   );
