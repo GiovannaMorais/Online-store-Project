@@ -1,50 +1,50 @@
 .product-card-list-container {
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
+  align-items: center;
   display: flex;
   flex-flow: row wrap;
+  height: 100%;
   justify-content: space-around;
-  align-items: center;
+  overflow-y: scroll;
+  width: 100%;
 }
 
 .product-card-list-container button {
-  margin-top: 5px;
-  border-radius: 5px;
   background-color: rgb(218, 165, 32, 0.6);
+  border-radius: 5px;
   color: white;
+  margin-top: 5px;
   padding: 5px;
 }
 
 .product-card-link {
+  align-items: center;
+  display: flex;
+  height: 260px;
+  justify-content: center;
   text-decoration: none;
   width: 200px;
-  height: 260px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .card-container {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  flex-flow: column nowrap;
-  margin: 5px;
   background-color: rgb(117, 117, 117, 0.7);
-  padding: 10px;
   border: solid 5px rgb(218, 165, 32, 0.6);
   border-radius: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  margin: 5px;
+  padding: 10px;
 }
 
 .product-item {
-  width: 100%;
-  height: 100%;
-  display: flex;
   align-items: center;
-  justify-content: space-around;
+  display: flex;
   flex-flow: column nowrap;
+  height: 100%;
+  justify-content: space-around;
   text-align: center;
+  width: 100%;
 }
 
 .product-title {
@@ -52,14 +52,14 @@
 }
 
 .product-thumbnail {
-  width: 100px;
   height: 100px;
+  width: 100px;
 }
 
 .product-thumbnail img {
-  width: 100%;
-  height: 100%;
   border-radius: 15px;
+  height: 100%;
+  width: 100%;
 }
 
 .product-shipping {
